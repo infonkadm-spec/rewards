@@ -25,7 +25,7 @@ export default function Page1({
           <span>Click the button below to see step-by-step how these reward platforms work.</span>
         </div>
       </div>
-      <Button onClick={() => setPage(page + 1)} className="!bg-green-600 !border-green-700 hover:!bg-green-500">
+      <Button onClick={() => setPage(page + 1)} className="!bg-gray-600 !border-gray-700 hover:!bg-gray-500">
         Access the guide
       </Button>
       <ConfettiEffect />

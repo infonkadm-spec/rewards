@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Timing dos Botões - Kim, Megan e Rock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .test-case {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+        .success { color: #4CAF50; font-weight: bold; }
+        .error { color: #f44336; font-weight: bold; }
+        .info { color: #2196F3; }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .result.pass {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+        }
+        .result.fail {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Timing dos Botões - Kim, Megan e Rock</h1>
+    
+    <div class="test-container">
+        <h2>📋 Configuração das Páginas</h2>
+        <div class="test-section">
+            <h3>Página KIM</h3>
+            <ul>
+                <li><strong>videoId:</strong> <code>69359e5677723b2a72cefc64</code></li>
+                <li><strong>pitchTime:</strong> <code>630 segundos</code> (10min 30s)</li>
+                <li><strong>Chave localStorage:</strong> <code>69359e5677723b2a72cefc64-resume</code></li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h3>Página MEGAN</h3>
+            <ul>
+                <li><strong>videoId:</strong> <code>69359e4d9f9c59a190d01503</code></li>
+                <li><strong>pitchTime:</strong> <code>630 segundos</code> (10min 30s)</li>
+                <li><strong>Chave localStorage:</strong> <code>69359e4d9f9c59a190d01503-resume</code></li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h3>Página ROCK</h3>
+            <ul>
+                <li><strong>videoId:</strong> <code>69359e59332125736afe6e6e</code></li>
+                <li><strong>pitchTime:</strong> <code>700 segundos</code> (11min 40s)</li>
+                <li><strong>Chave localStorage:</strong> <code>69359e59332125736afe6e6e-resume</code></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔍 Testes Automatizados</h2>
+        
+        <div id="test-results"></div>
+        
+        <button onclick="runAllTests()">▶️ Executar Todos os Testes</button>
+        <button onclick="clearLocalStorage()">🗑️ Limpar localStorage</button>
+        <button onclick="showCurrentValues()">📊 Ver Valores Atuais</button>
+    </div>
+
+    <div class="test-container">
+        <h2>🎮 Testes Manuais</h2>
+        <p>Use os botões abaixo para simular diferentes tempos no localStorage:</p>
+        
+        <div class="test-section">
+            <h3>KIM - Testes</h3>
+            <button onclick="setKimTime(629)">Teste: 629s (ANTES - não deve aparecer)</button>
+            <button onclick="setKimTime(630)">Teste: 630s (EXATO - não deve aparecer)</button>
+            <button onclick="setKimTime(631)">Teste: 631s (DEPOIS - deve aparecer)</button>
+            <button onclick="setKimTime(631000)">Teste: 631000ms (DEPOIS - deve aparecer)</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>MEGAN - Testes</h3>
+            <button onclick="setMeganTime(629)">Teste: 629s (ANTES - não deve aparecer)</button>
+            <button onclick="setMeganTime(630)">Teste: 630s (EXATO - não deve aparecer)</button>
+            <button onclick="setMeganTime(631)">Teste: 631s (DEPOIS - deve aparecer)</button>
+            <button onclick="setMeganTime(631000)">Teste: 631000ms (DEPOIS - deve aparecer)</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>ROCK - Testes</h3>
+            <button onclick="setRockTime(699)">Teste: 699s (ANTES - não deve aparecer)</button>
+            <button onclick="setRockTime(700)">Teste: 700s (EXATO - não deve aparecer)</button>
+            <button onclick="setRockTime(701)">Teste: 701s (DEPOIS - deve aparecer)</button>
+            <button onclick="setRockTime(701000)">Teste: 701000ms (DEPOIS - deve aparecer)</button>
+        </div>
+        
+        <p class="info">💡 <strong>Dica:</strong> Após definir um valor, recarregue a página correspondente para ver o resultado.</p>
+    </div>
+
+    <script>
+        const CONFIG = {
+            kim: {
+                videoId: '69359e5677723b2a72cefc64',
+                pitchTime: 630,
+                name: 'KIM'
+            },
+            megan: {
+                videoId: '69359e4d9f9c59a190d01503',
+                pitchTime: 630,
+                name: 'MEGAN'
+            },
+            rock: {
+                videoId: '69359e59332125736afe6e6e',
+                pitchTime: 700,
+                name: 'ROCK'
+            }
+        };
+
+        function getStorageKey(videoId) {
+            return `${videoId}-resume`;
+        }
+
+        function simulateLogic(videoId, pitchTime, storedValue) {
+            if (!storedValue) return { shouldShow: false, reason: 'Sem valor no localStorage' };
+            
+            const storedVideoTime = Number(storedValue);
+            if (isNaN(storedVideoTime) || storedVideoTime <= 0) {
+                return { shouldShow: false, reason: 'Valor inválido (NaN ou <= 0)' };
+            }
+            
+            const videoTimeInSeconds = storedVideoTime > 60000 ? storedVideoTime / 1000 : storedVideoTime;
+            const shouldShow = videoTimeInSeconds > pitchTime;
+            
+            return {
+                shouldShow,
+                reason: shouldShow 
+                    ? `Tempo (${videoTimeInSeconds}s) > pitchTime (${pitchTime}s)` 
+                    : `Tempo (${videoTimeInSeconds}s) <= pitchTime (${pitchTime}s)`,
+                videoTimeInSeconds,
+                originalValue: storedValue
+            };
+        }
+
+        function runAllTests() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<h3>Executando testes...</h3>';
+            
+            const testCases = [
+                // KIM tests
+                { page: 'kim', time: 629, expected: false, description: 'KIM: 629s (antes do tempo)' },
+                { page: 'kim', time: 630, expected: false, description: 'KIM: 630s (tempo exato)' },
+                { page: 'kim', time: 631, expected: true, description: 'KIM: 631s (depois do tempo)' },
+                { page: 'kim', time: 631000, expected: true, description: 'KIM: 631000ms (depois do tempo em ms)' },
+                
+                // MEGAN tests
+                { page: 'megan', time: 629, expected: false, description: 'MEGAN: 629s (antes do tempo)' },
+                { page: 'megan', time: 630, expected: false, description: 'MEGAN: 630s (tempo exato)' },
+                { page: 'megan', time: 631, expected: true, description: 'MEGAN: 631s (depois do tempo)' },
+                { page: 'megan', time: 631000, expected: true, description: 'MEGAN: 631000ms (depois do tempo em ms)' },
+                
+                // ROCK tests
+                { page: 'rock', time: 699, expected: false, description: 'ROCK: 699s (antes do tempo)' },
+                { page: 'rock', time: 700, expected: false, description: 'ROCK: 700s (tempo exato)' },
+                { page: 'rock', time: 701, expected: true, description: 'ROCK: 701s (depois do tempo)' },
+                { page: 'rock', time: 701000, expected: true, description: 'ROCK: 701000ms (depois do tempo em ms)' },
+            ];
+
+            let html = '<h3>📊 Resultados dos Testes</h3>';
+            let passed = 0;
+            let failed = 0;
+
+            testCases.forEach(test => {
+                const config = CONFIG[test.page];
+                const storageKey = getStorageKey(config.videoId);
+                const result = simulateLogic(config.videoId, config.pitchTime, String(test.time));
+                const testPassed = result.shouldShow === test.expected;
+                
+                if (testPassed) passed++;
+                else failed++;
+
+                html += `
+                    <div class="test-case">
+                        <div class="result ${testPassed ? 'pass' : 'fail'}">
+                            <strong>${testPassed ? '✅ PASSOU' : '❌ FALHOU'}</strong> - ${test.description}<br>
+                            <small>${result.reason}</small>
+                            ${result.videoTimeInSeconds !== undefined ? `<br><small>Valor convertido: ${result.videoTimeInSeconds}s</small>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="test-case">
+                    <h3>📈 Resumo</h3>
+                    <p><span class="success">✅ Passou: ${passed}</span> | <span class="error">❌ Falhou: ${failed}</span></p>
+                    <p>Total: ${testCases.length} testes</p>
+                </div>
+            `;
+
+            results.innerHTML = html;
+        }
+
+        function setKimTime(time) {
+            const key = getStorageKey(CONFIG.kim.videoId);
+            localStorage.setItem(key, String(time));
+            alert(`✅ Valor definido para KIM: ${time}\n\nChave: ${key}\n\nRecarregue a página KIM para ver o resultado.`);
+        }
+
+        function setMeganTime(time) {
+            const key = getStorageKey(CONFIG.megan.videoId);
+            localStorage.setItem(key, String(time));
+            alert(`✅ Valor definido para MEGAN: ${time}\n\nChave: ${key}\n\nRecarregue a página MEGAN para ver o resultado.`);
+        }
+
+        function setRockTime(time) {
+            const key = getStorageKey(CONFIG.rock.videoId);
+            localStorage.setItem(key, String(time));
+            alert(`✅ Valor definido para ROCK: ${time}\n\nChave: ${key}\n\nRecarregue a página ROCK para ver o resultado.`);
+        }
+
+        function clearLocalStorage() {
+            Object.values(CONFIG).forEach(config => {
+                const key = getStorageKey(config.videoId);
+                localStorage.removeItem(key);
+            });
+            alert('✅ localStorage limpo para todas as páginas!');
+        }
+
+        function showCurrentValues() {
+            let message = '📊 Valores Atuais no localStorage:\n\n';
+            
+            Object.values(CONFIG).forEach(config => {
+                const key = getStorageKey(config.videoId);
+                const value = localStorage.getItem(key);
+                const result = simulateLogic(config.videoId, config.pitchTime, value);
+                
+                message += `${config.name}:\n`;
+                message += `  Chave: ${key}\n`;
+                message += `  Valor: ${value || 'não definido'}\n`;
+                if (value) {
+                    message += `  Tempo convertido: ${result.videoTimeInSeconds || 'N/A'}s\n`;
+                    message += `  Botão deve aparecer: ${result.shouldShow ? '✅ SIM' : '❌ NÃO'}\n`;
+                    message += `  Motivo: ${result.reason}\n`;
+                }
+                message += '\n';
+            });
+            
+            alert(message);
+        }
+
+        // Executar testes automaticamente ao carregar
+        window.onload = function() {
+            runAllTests();
+        };
+    </script>
+</body>
+</html>
+

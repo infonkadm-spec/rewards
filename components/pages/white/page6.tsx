@@ -26,7 +26,7 @@ export default function Page6({
           Click the button below to see how withdrawal processes work on these platforms.
         </div>
       </div>
-      <Button onClick={() => setPage(page + 1)} className="!bg-green-600 !border-green-700 hover:!bg-green-500">
+      <Button onClick={() => setPage(page + 1)} className="!bg-gray-600 !border-gray-700 hover:!bg-gray-500">
         <CirclePlay /> See how it works
       </Button>
       <ConfettiEffect />

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function VSLBlackKim() {
+export default function VSLBlackRock() {
   useEffect(() => {
     const loadPlayerScript = () => {
       if (document.querySelector('script[src*="69359e59332125736afe6e6e"]')) return;
