@@ -34,11 +34,18 @@ export default function Page({
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume')) || 0;
-        // Converte para segundos se estiver em milissegundos (valores maiores que 10000)
-        const videoTimeInSeconds = storedVideoTime > 10000 ? storedVideoTime / 1000 : storedVideoTime;
-        // Verifica se o tempo é válido e se realmente passou do pitchTime
-        if (videoTimeInSeconds && videoTimeInSeconds >= pitchTime) {
+        const storedValue = localStorage.getItem(videoId + '-resume');
+        if (!storedValue) return;
+        
+        const storedVideoTime = Number(storedValue);
+        if (isNaN(storedVideoTime) || storedVideoTime <= 0) return;
+        
+        // Se o valor for maior que 60000, provavelmente está em milissegundos (mais de 1 minuto em ms)
+        // Converte para segundos dividindo por 1000
+        const videoTimeInSeconds = storedVideoTime > 60000 ? storedVideoTime / 1000 : storedVideoTime;
+        
+        // Verifica se o tempo realmente passou do pitchTime (usa > ao invés de >= para garantir que passou)
+        if (videoTimeInSeconds > pitchTime) {
           setVisible(true);
         };
       }, 1000);
