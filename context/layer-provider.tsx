@@ -29,9 +29,19 @@ export function LayerProvider({
   children,
 }: LayerProviderProps) {
 
-  // SET LINKS
-  const frontLink = 'https://pay.hotmart.com/M103047413I?off=oklx29sw';
-  const promoLink = 'https://pay.hotmart.com/M103047413I?off=rskh1e73';
+  // HELPER FUNCTION TO ADD SRC PARAMETER
+  const addSrcParam = (url: string, src: string): string => {
+    if (!src) return url;
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}src=${src}`;
+  };
+
+  // SET LINKS WITH SRC PARAMETER
+  const baseFrontLink = 'https://pay.hotmart.com/M103047413I?off=oklx29sw';
+  const basePromoLink = 'https://pay.hotmart.com/M103047413I?off=rskh1e73';
+  
+  const frontLink = addSrcParam(baseFrontLink, content);
+  const promoLink = addSrcParam(basePromoLink, content);
 
   const contextValue = {
     host,
