@@ -16,18 +16,18 @@ export default function Page6({
     <>
       <div className="flex flex-col text-center text-base rounded-2xl gap-7 bg-gradient-to-t appear px-8 py-10 from-gray-50 to-gray-200">
         <div className="flex flex-col gap-4">
-          <span className="text-2xl font-semibold">🎁 Congratulations! 🎁</span>
-          <span className="text-base font-normal">Your balance is available for immediate withdrawal! 🎉</span>
+          <span className="text-2xl font-semibold">Guide Completed</span>
+          <span className="text-base font-normal">You have completed the educational guide about reward platforms.</span>
         </div>
         <div className="rounded-lg shadow-lg border p-5 bg-green-50">
-          <span className="font-semibold text-base">These are your earnings for the 4 evaluations you just completed</span>
+          <span className="font-semibold text-base">This guide showed you how evaluation platforms work. Remember that earnings are not guaranteed and depend on external platforms and your activity.</span>
         </div>
         <div className="text-sm">
-          Click on the button below and see the withdrawal guide! 👇
+          Click the button below to see how withdrawal processes work on these platforms.
         </div>
       </div>
       <Button onClick={() => setPage(page + 1)} className="!bg-green-600 !border-green-700 hover:!bg-green-500">
-        <CirclePlay /> Yes, withdraw my balance now!
+        <CirclePlay /> See how it works
       </Button>
       <ConfettiEffect />
     </>

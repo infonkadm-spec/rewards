@@ -2,7 +2,7 @@
 
 "use client";
 
-import Logo from "@/components/logo";
+import LogoBlack from "@/components/logo-black";
 import Modal from "@/components/modal";
 import Page1Kim from "@/components/pages/black/kim/page1";
 import Page2Kim from "@/components/pages/black/kim/page2";
@@ -19,7 +19,7 @@ import Page2Megan from "@/components/pages/black/megan/page2";
 import Page3Megan from "@/components/pages/black/megan/page3";
 import Page4Megan from "@/components/pages/black/megan/page4";
 import Page5Megan from "@/components/pages/black/megan/page5";
-import Balance from "@/components/balance";
+import BalanceBlack from "@/components/balance-black";
 import { useLayer } from "@/context/layer-provider";
 import { useEffect, useState } from "react";
 
@@ -110,8 +110,8 @@ export default function Page() {
   return (
     <div className="flex flex-col w-full max-w-xl gap-5 px-4 py-5 pb-10">
       <div className="flex justify-between items-center">
-        <Logo />
-        <Balance
+        <LogoBlack />
+        <BalanceBlack
           page={page}
           content={content}
         />

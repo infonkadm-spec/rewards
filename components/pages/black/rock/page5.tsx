@@ -26,7 +26,7 @@ export default function Page({
 
   // SET CONTENT DATA
   const VSL = VSLBlackRock;
-  const videoId = "68a4d6f8cad301b5b6b568f7";
+  const videoId = "69359e59332125736afe6e6e";
   const backLink = `https://${userHost}/promo`;
   const pitchTime = 700;
 
@@ -34,14 +34,14 @@ export default function Page({
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume'));
+        const storedVideoTime = Number(localStorage.getItem('vid-' + videoId + '-resume'));
         if (storedVideoTime > pitchTime) {
           setVisible(true);
         };
       }, 1000);
       return () => clearInterval(intervalId);
     };
-  }, [videoId, visible]);
+  }, [videoId, visible, pitchTime]);
 
   // BACK REDIRECT
   useEffect(() => {
