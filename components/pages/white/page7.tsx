@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import CountUp from '@/components/countUp';
 import Comment from "@/components/comments/comment";
 import VSLGray from '@/components/videos/vsl-gray';
@@ -6,8 +8,8 @@ import { CircleAlert } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Page7({
-  page,
-  setPage,
+  page: _page,
+  setPage: _setPage,
 }:{
   page: number,
   setPage: any,
