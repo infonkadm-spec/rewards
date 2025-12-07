@@ -34,8 +34,11 @@ export default function Page({
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem('vid-' + videoId + '-resume'));
-        if (storedVideoTime > pitchTime) {
+        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume')) || 0;
+        // Converte para segundos se estiver em milissegundos (valores maiores que 10000)
+        const videoTimeInSeconds = storedVideoTime > 10000 ? storedVideoTime / 1000 : storedVideoTime;
+        // Verifica se o tempo é válido e se realmente passou do pitchTime
+        if (videoTimeInSeconds && videoTimeInSeconds >= pitchTime) {
           setVisible(true);
         };
       }, 1000);

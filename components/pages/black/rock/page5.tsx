@@ -26,7 +26,7 @@ export default function Page({
 
   // SET CONTENT DATA
   const VSL = VSLBlackRock;
-  const videoId = "69359e59332125736afe6e6e";
+  const videoId = "68a4d6f8cad301b5b6b568f7";
   const backLink = `https://${userHost}/promo`;
   const pitchTime = 700;
 
@@ -34,8 +34,11 @@ export default function Page({
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem('vid-' + videoId + '-resume'));
-        if (storedVideoTime > pitchTime) {
+        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume')) || 0;
+        // Converte para segundos se estiver em milissegundos (valores maiores que 10000)
+        const videoTimeInSeconds = storedVideoTime > 10000 ? storedVideoTime / 1000 : storedVideoTime;
+        // Verifica se o tempo é válido e se realmente passou do pitchTime
+        if (videoTimeInSeconds && videoTimeInSeconds >= pitchTime) {
           setVisible(true);
         };
       }, 1000);
