@@ -1,28 +1,43 @@
-/* eslint-disable react/no-unescaped-entities */
-
-import Image from "next/image";
-import Script from "next/script";
+import { useEffect } from "react";
 
 export default function VSLWhite() {
+  useEffect(() => {
+    const loadPlayerScript = () => {
+      if (document.querySelector('script[src*="6934604c332125736afd5b19"]')) return;
+      const script = document.createElement("script");
+      script.src = "https://scripts.converteai.net/7811ed69-550c-4b89-9a28-8ab5dbe8db56/players/6934604c332125736afd5b19/v4/player.js";
+      script.async = true;
+      script.onload = () => {
+        console.log("Player script loaded successfully");
+      };
+      script.onerror = () => {
+        console.error("Failed to load player script");
+      };
+      document.head.appendChild(script);
+    };
+
+    loadPlayerScript();
+
+    return () => {
+      const existingScript = document.querySelector('script[src*="6934604c332125736afd5b19"]');
+      if (existingScript) {
+        existingScript.remove();
+      };
+    };
+  }, []);
 
   return (
-    <>
-      <div id="vid_6733fb0afe70f3000c9296b9" style={{ position: "relative", width: "100%", padding: "84.375% 0 0", borderRadius: "20px" }}>
-        <Image
-          alt="Video"
-          width={64}
-          height={54}
-          id="thumb_6733fb0afe70f3000c9296b9" src="https://images.converteai.net/51bb56e8-38bf-4e58-87dd-2429e902a5b3/players/6733fb0afe70f3000c9296b9/thumbnail.jpg"
-          style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          unoptimized
-        />
-        <div id="backdrop_6733fb0afe70f3000c9296b9"
-          style={{ position: "absolute", top: "0", left: "0", width: "100%", height: "100%", WebkitBackdropFilter: "blur(5px)", backdropFilter: "blur(5px)" }} />
-      </div>
-      <Script id="scr_6733fb0afe70f3000c9296b9" strategy="afterInteractive">
-        var s=document.createElement("script"); s.src="https://scripts.converteai.net/51bb56e8-38bf-4e58-87dd-2429e902a5b3/players/6733fb0afe70f3000c9296b9/player.js", s.async=!0,document.head.appendChild(s);
-      </Script>
-    </>
+    // @ts-expect-error - Player script is not defined in the global scope
+    <vturb-smartplayer 
+      id="vid-6934604c332125736afd5b19" 
+      style={{ 
+        width: "100%",
+        margin: "0 auto", 
+        display: "block",
+        "--player-border-radius": "20px",
+        "--player-box-shadow": "0 5px 5px 0 rgba(0, 0, 0, 0.2)",
+      }} 
+    />
   );
-  
+
 };
