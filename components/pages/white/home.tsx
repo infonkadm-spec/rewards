@@ -32,6 +32,11 @@ export default function Home() {
   // SET PAGE CONTENT
   const PageContent = RoutesWhite[page];
 
+  // SAFETY CHECK
+  if (!PageContent) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col w-full max-w-xl gap-5 px-4 py-5 pb-10">
       <div className="flex justify-between items-center">

@@ -5,7 +5,13 @@ import CommentReply from "@/components/comments/comment-reply";
 import { CircleAlert } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export default function Page7() {
+export default function Page7({
+  page,
+  setPage,
+}:{
+  page: number,
+  setPage: any,
+}) {
 
   const [visible, setVisible] = useState<boolean>(false);
   const videoId = "6708631ec0f437000cf541d0";
