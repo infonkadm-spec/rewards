@@ -14,14 +14,19 @@ export default function Page() {
       </div>
       <div className="flex flex-col w-full max-w-xl gap-6 px-5 py-6">
         <div className="flex flex-col items-center gap-2.5 text-center">
-          <span className="text-xs italic opacity-60">
-            We are processing your payment…
+          <span className="text-sm text-gray-700">
+            We are processing your fee payment...
           </span>
-          <Progress progress={96} />
+          <Progress progress={67} />
         </div>
-        <div className="flex flex-col text-center text-sm rounded-3xl gap-5 bg-gradient-to-t appear border-t px-5 py-6 -mb-5 from-gray-100 to-white border-gray-300">
-          <div className="font-bold">
-            Ok, we&apos;ll give you one more chance, your last chance on this page only!
+        <div className="flex flex-col text-center rounded-3xl gap-5 bg-white border border-gray-200 shadow-sm px-5 py-6">
+          <div className="flex items-center justify-center gap-2 text-lg font-bold text-gray-800 uppercase">
+            <span>🎉</span>
+            <span>CONGRATULATIONS! YOU WON A SURPRISE!</span>
+            <span>🎁</span>
+          </div>
+          <div className="text-sm font-semibold text-gray-700 uppercase">
+            CLICK THE GREEN BUTTON BELOW AND RECEIVE IT IMMEDIATELY!
           </div>
           <HotmartUpsell black={true} />
         </div>

@@ -25,9 +25,9 @@ export default function Progress({
   );
 
   return (
-    <div className="flex items-center w-full rounded-xl relative bg-white">
+    <div className="flex items-center w-full rounded-xl relative bg-white h-5">
       <div className="bg-green-500 flex items-center justify-center h-5 leading-none rounded-xl transition-all duration-500 delay-500" style={progressBarStyle} />
-      <span className="absolute w-1/2 translate-x-1/2 left-0 text-xs text-center font-bold text-red-50">
+      <span className="absolute left-0 w-full text-xs text-center font-bold text-white z-10">
         <CountUp start={0} end={progress} duration={3000} /> %
       </span>
       {progressBarAnimation}

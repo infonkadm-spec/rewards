@@ -32,6 +32,10 @@ export function middleware(req: NextRequest) {
   if (catParam && paramList[catParam]) {
 
     params.delete('xcat');
+    // Preserve xtest parameter if it exists
+    if (localParam === localTestParam) {
+      params.set('xtest', localTestParam);
+    }
     const newUrl = req.nextUrl.clone();
     newUrl.search = params.toString();
   
@@ -44,6 +48,11 @@ export function middleware(req: NextRequest) {
       maxAge: 60 * 60 * 72,
       httpOnly: false,
     });
+  
+    // Preserve x-local-param header in redirect response
+    if (localParam === localTestParam) {
+      response.headers.set('x-local-param', 'true');
+    }
   
     return response;
   
