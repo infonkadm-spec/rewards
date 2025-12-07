@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import CountUp from '@/components/countUp';
 import Comment from "@/components/comments/comment";
@@ -8,8 +9,8 @@ import { CircleAlert } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function Page7({
-  page: _page,
-  setPage: _setPage,
+  page,
+  setPage,
 }:{
   page: number,
   setPage: any,
