@@ -3,7 +3,7 @@
 import Script from "next/script";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Check, Heart, BookOpen, Video } from "lucide-react";
+import { Check, BookOpen, Video } from "lucide-react";
 
 // Interface para o tipo do Hotmart
 interface HotmartCheckoutElements {
