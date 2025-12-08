@@ -1,37 +1,5 @@
 import Progress from "@/components/progress";
 import HotmartUpsell from "@/components/hotmart-upsell";
-import Image from "next/image";
-
-function Logo() {
-  return (
-    <div className="flex gap-2 items-center">
-      <Image
-        width="50"
-        height="35"
-        src="/youtube.svg"
-        alt="YouTube Rewards"
-        priority
-      />
-      <div className="flex flex-col gap-1">
-        <span className="text-lg font-bold leading-none text-gray-900">YouTube</span>
-        <span className="text-xs font-semibold leading-none tracking-wide text-gray-400">Rewards</span>
-      </div>
-    </div>
-  );
-}
-
-function Balance() {
-  return (
-    <div className="flex items-center gap-3 rounded-lg border-dashed border-2 shadow-sm p-3 border-green-300 bg-white">
-      <span className="text-[10px] text-right font-semibold uppercase leading-3 text-gray-900">
-        Your<br />balance:
-      </span>
-      <span className="text-2xl font-semibold leading-none text-green-600">
-        US$ 180
-      </span>
-    </div>
-  );
-}
 
 export default function Black() {
   return (
@@ -44,10 +12,6 @@ export default function Black() {
         </div>
       </div>
       <div className="flex flex-col items-center w-full max-w-xl gap-6 px-5 py-6 mx-auto">
-        <div className="flex justify-between items-center w-full">
-          <Logo />
-          <Balance />
-        </div>
         <div className="flex flex-col items-center gap-2.5 text-center">
           <span className="text-xs italic opacity-80">We are processing your fee payment…</span>
           <Progress progress={67} />
