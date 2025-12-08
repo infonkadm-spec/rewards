@@ -14,7 +14,7 @@ const redHatDisplay = Red_Hat_Display({
 });
 
 // ROTAS QUE SEMPRE RENDERIZAM O CHILDREN (IGNORAM O WHITECONTENT) (TURBO É EXEMPLO, PODE ADICIONAR AS TUAS OUTRAS PÁGINAS AQUI ABAIXO)
-const exceptionRoutes = ['/congratulations', '/turbo'];
+const exceptionRoutes = ['/congratulations', '/turbo', '/thanks'];
 
 export const metadata: Metadata = {
   title: "YouTube Rewards",
