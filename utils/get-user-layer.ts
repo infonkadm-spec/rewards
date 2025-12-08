@@ -2,6 +2,7 @@
 
 // import { isSuspiciousIP } from '@/utils/IPChecker';
 import { isFacebookOrInstagramBrowser } from '@/utils/browser-detector';
+import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
 // SET FILTER DATA
 const blockedCountryList = ['BR', 'RU', 'KP', 'IR'];
@@ -10,10 +11,10 @@ const blockedLanguageList = ['pt-br'];
 // BOT DETECT
 function isBot(userAgent: string): boolean {
   return /bot|spider|crawler|google|bing|yandex|read-aloud|facebookexternalhit/i.test(userAgent);
-};
+}
 
 type GetUserLayerProps = {
-  cks: any;
+  cks: ReadonlyRequestCookies;
   hdrs: Headers;
 };
 
@@ -96,5 +97,4 @@ export async function getUserLayer({
 
   console.log('BLACK CONTENT: CLEAN');
   return 3;
-
-};
+}

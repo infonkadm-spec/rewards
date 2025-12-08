@@ -6,7 +6,7 @@ import Confetti from "@/components/confetti";
 import { useState } from "react";
 import { useLayer } from "@/context/layer-provider";
 import { CheckCheck, Loader2 } from "lucide-react";
-import LogoBlack from "@/components/logo-black";
+import Logo from "@/components/logo";
 
 export default function Page() {
 
@@ -39,7 +39,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col w-full text-sm max-w-xl gap-6 px-5 py-6">
         <div className="flex justify-between items-center">
-          <LogoBlack />
+          <Logo />
           <Balance
             page={5}
             content={content}

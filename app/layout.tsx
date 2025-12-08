@@ -13,6 +13,9 @@ const redHatDisplay = Red_Hat_Display({
   weight: ["400", "500", "600", "700", "900"],
 });
 
+// ROTAS QUE SEMPRE RENDERIZAM O CHILDREN (IGNORAM O WHITECONTENT) (TURBO É EXEMPLO, PODE ADICIONAR AS TUAS OUTRAS PÁGINAS AQUI ABAIXO)
+const exceptionRoutes = ['/congratulations', '/turbo'];
+
 export const metadata: Metadata = {
   title: "YouTube Rewards",
   description: "This new YouTube tool is scaring experts around the world.",
@@ -38,6 +41,11 @@ export default async function Layout({
   // GET USER LAYER
   const userLayer = await getUserLayer({ cks, hdrs });
 
+  // GET CURRENT PATH
+  const url = hdrs.get('x-url') || '';
+  const currentPath = new URL(url || 'http://localhost').pathname;
+  const isExceptionRoute = exceptionRoutes.includes(currentPath);
+
   // BODY CLASS
   const bodyClassName = `flex flex-col min-w-[350px] items-center select-none ${redHatDisplay.variable} antialiased`;
     
@@ -49,7 +57,7 @@ export default async function Layout({
         </head>
       )}
       <body className={bodyClassName} suppressHydrationWarning>
-        {userLayer === 1 ?
+        {userLayer === 1 && !isExceptionRoute ?
           <WhiteContent />
         : (
           <LayerProvider
