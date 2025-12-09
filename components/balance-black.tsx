@@ -5,9 +5,9 @@ import { Wallet } from "lucide-react";
 const balance: Record<string, Record<number, { start: number, end: number }>> = {
   "kim": {
     1: { start: 0, end: 0 },
-    2: { start: 0, end: 60 },
-    3: { start: 60, end: 120 },
-    4: { start: 120, end: 180 },
+    2: { start: 0, end: 63 },
+    3: { start: 63, end: 123 },
+    4: { start: 123, end: 180 },
     5: { start: 180, end: 180 },
     6: { start: 180, end: 180 },
   },
@@ -21,9 +21,9 @@ const balance: Record<string, Record<number, { start: number, end: number }>> = 
   },
   "megan": {
     1: { start: 0, end: 0 },
-    2: { start: 0, end: 60 },
-    3: { start: 60, end: 120 },
-    4: { start: 120, end: 180 },
+    2: { start: 0, end: 63 },
+    3: { start: 63, end: 123 },
+    4: { start: 123, end: 180 },
     5: { start: 180, end: 180 },
     6: { start: 180, end: 180 },
   },

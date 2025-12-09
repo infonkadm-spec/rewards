@@ -2,20 +2,34 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import CountUp from '@/components/countUp';
 
 // SET COMPONENT DATA
-const value: Record<string, number> = {
-  "kim": 60,
-  "rock": 71,
-  "megan": 60,
+const value: Record<string, Record<number, number>> = {
+  "kim": {
+    1: 63,
+    2: 60,
+    3: 57,
+  },
+  "rock": {
+    1: 71,
+    2: 71,
+    3: 71,
+  },
+  "megan": {
+    1: 63,
+    2: 60,
+    3: 57,
+  },
 };
 
 export default function Modal({
   content,
+  page,
 }:{
   content: string,
+  page: number,
 }) {
 
   // SET COMPONENT DATA
-  const valueData = value[content];
+  const valueData = value[content]?.[page] || 0;
 
   return (
     <div className="flex justify-center items-center fixed inset-0 z-10 backdrop-blur-sm bg-black/40">
