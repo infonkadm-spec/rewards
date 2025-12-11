@@ -16,10 +16,24 @@ const redHatDisplay = Red_Hat_Display({
 // ROTAS QUE SEMPRE RENDERIZAM O CHILDREN (IGNORAM O WHITECONTENT) (TURBO É EXEMPLO, PODE ADICIONAR AS TUAS OUTRAS PÁGINAS AQUI ABAIXO)
 const exceptionRoutes = ['/congratulations', '/turbo', '/thanks'];
 
-export const metadata: Metadata = {
-  title: "YouTube Rewards",
-  description: "This new YouTube tool is scaring experts around the world.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cks = await cookies();
+  const hdrs = await headers();
+  const userLayer = await getUserLayer({ cks, hdrs });
+  
+  // GET CURRENT PATH
+  const url = hdrs.get('x-url') || '';
+  const currentPath = new URL(url || 'http://localhost').pathname;
+  const isExceptionRoute = exceptionRoutes.includes(currentPath);
+  
+  // Se for página white (userLayer === 1) e não for rota de exceção, usa "Check this out"
+  const isWhitePage = userLayer === 1 && !isExceptionRoute;
+  
+  return {
+    title: isWhitePage ? "Check this out" : "Rewards Program",
+    description: "This new tool is scaring experts around the world.",
+  };
+}
 
 export default async function Layout({
   children,
