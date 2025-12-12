@@ -33,15 +33,53 @@ export default function Page({
   // VIDEO VERIFY
   useEffect(() => {
     if (!visible) {
-      const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume'));
-        if (storedVideoTime > pitchTime) {
-          setVisible(true);
+      // Tenta diferentes chaves possíveis no localStorage
+      const possibleKeys = [
+        videoId + '-resume',
+        'vid-' + videoId + '-resume',
+        videoId + '-time',
+        'vid-' + videoId + '-time',
+      ];
+      
+      const checkVideoTime = () => {
+        for (const key of possibleKeys) {
+          const storedValue = localStorage.getItem(key);
+          if (!storedValue) continue;
+          
+          const storedVideoTime = Number(storedValue);
+          if (isNaN(storedVideoTime) || storedVideoTime <= 0) continue;
+          
+          // Converte milissegundos para segundos se necessário
+          const videoTimeInSeconds = storedVideoTime > 60000 ? storedVideoTime / 1000 : storedVideoTime;
+          
+          if (videoTimeInSeconds > pitchTime) {
+            setVisible(true);
+            return;
+          };
+        }
+      };
+
+      // Verifica imediatamente
+      checkVideoTime();
+      
+      // Verifica a cada 1 segundo
+      const intervalId = setInterval(checkVideoTime, 1000);
+      
+      // Também escuta eventos de storage (caso o player atualize o localStorage)
+      const handleStorageChange = (e: StorageEvent) => {
+        if (e.key && possibleKeys.includes(e.key)) {
+          checkVideoTime();
         };
-      }, 1000);
-      return () => clearInterval(intervalId);
+      };
+      
+      window.addEventListener('storage', handleStorageChange);
+      
+      return () => {
+        clearInterval(intervalId);
+        window.removeEventListener('storage', handleStorageChange);
+      };
     };
-  }, [videoId, visible]);
+  }, [videoId, visible, pitchTime]);
 
   // BACK REDIRECT
   useEffect(() => {
