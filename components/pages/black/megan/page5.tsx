@@ -26,7 +26,7 @@ export default function Page({
 
   // SET CONTENT DATA
   const VSL = VSLBlackMegan;
-  const videoId = "69359e4d9f9c59a190d01503";
+  const videoId = "6936bfc7332125736aff6cc4";
   const backLink = `https://${userHost}/promo`;
   const pitchTime = 630;
 
@@ -37,11 +37,11 @@ export default function Page({
         const storedVideoTime = Number(localStorage.getItem(videoId + '-resume'));
         if (storedVideoTime > pitchTime) {
           setVisible(true);
-        };
+        }
       }, 1000);
       return () => clearInterval(intervalId);
-    };
-  }, [videoId, visible]);
+    }
+  }, [videoId, visible, pitchTime]);
 
   // BACK REDIRECT
   useEffect(() => {
@@ -54,15 +54,23 @@ export default function Page({
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
-      window.addEventListener('popstate', () => {
+      
+      const handlePopState = () => {
         console.log('onpopstate', urlBackRedirect);
         setTimeout(() => {
           location.href = urlBackRedirect;
         }, 1);
-      });
-    };
+      };
+      
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
 
-    setBackRedirect(backLink);
+    const cleanup = setBackRedirect(backLink);
+    return cleanup;
   }, [backLink]);
 
   return (

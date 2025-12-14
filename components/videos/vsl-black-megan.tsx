@@ -3,9 +3,9 @@ import { useEffect } from "react";
 export default function VSLBlackMegan() {
   useEffect(() => {
     const loadPlayerScript = () => {
-      if (document.querySelector('script[src*="69359e4d9f9c59a190d01503"]')) return;
+      if (document.querySelector('script[src*="6936bfc7332125736aff6cc4"]')) return;
       const script = document.createElement("script");
-      script.src = "https://scripts.converteai.net/7811ed69-550c-4b89-9a28-8ab5dbe8db56/players/69359e4d9f9c59a190d01503/v4/player.js";
+      script.src = "https://scripts.converteai.net/7811ed69-550c-4b89-9a28-8ab5dbe8db56/players/6936bfc7332125736aff6cc4/v4/player.js";
       script.async = true;
       script.onload = () => {
         console.log("Player script loaded successfully");
@@ -19,25 +19,22 @@ export default function VSLBlackMegan() {
     loadPlayerScript();
 
     return () => {
-      const existingScript = document.querySelector('script[src*="69359e4d9f9c59a190d01503"]');
+      const existingScript = document.querySelector('script[src*="6936bfc7332125736aff6cc4"]');
       if (existingScript) {
         existingScript.remove();
-      };
+      }
     };
   }, []);
 
   return (
     // @ts-expect-error - Player script is not defined in the global scope
     <vturb-smartplayer 
-      id="vid-69359e4d9f9c59a190d01503" 
+      id="vid-6936bfc7332125736aff6cc4" 
       style={{ 
         width: "100%",
         margin: "0 auto", 
         display: "block",
-        "--player-border-radius": "20px",
-        "--player-box-shadow": "0 5px 5px 0 rgba(0, 0, 0, 0.2)",
       }} 
     />
   );
-
-};
+}

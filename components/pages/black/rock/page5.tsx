@@ -26,7 +26,7 @@ export default function Page({
 
   // SET CONTENT DATA
   const VSL = VSLBlackRock;
-  const videoId = "69359e59332125736afe6e6e";
+  const videoId = "6936bfc762cebd25172bd191";
   const backLink = `https://${userHost}/promo`;
   const pitchTime = 700;
 
@@ -92,15 +92,23 @@ export default function Page({
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
-      window.addEventListener('popstate', () => {
+      
+      const handlePopState = () => {
         console.log('onpopstate', urlBackRedirect);
         setTimeout(() => {
           location.href = urlBackRedirect;
         }, 1);
-      });
-    };
+      };
+      
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
 
-    setBackRedirect(backLink);
+    const cleanup = setBackRedirect(backLink);
+    return cleanup;
   }, [backLink]);
 
   return (
