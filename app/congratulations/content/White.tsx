@@ -42,6 +42,37 @@ const itemVariants = {
 };
 
 export default function White() {
+  // BACK REDIRECT
+  useEffect(() => {
+    function setBackRedirect(url: string) {
+      let urlBackRedirect = url;
+      urlBackRedirect =
+        urlBackRedirect.trim() +
+        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+        document.location.search.replace('?', '').toString();
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      
+      const handlePopState = () => {
+        console.log('onpopstate', urlBackRedirect);
+        setTimeout(() => {
+          location.href = urlBackRedirect;
+        }, 1);
+      };
+      
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+
+    const backLink = '/lastchance';
+    const cleanup = setBackRedirect(backLink);
+    return cleanup;
+  }, []);
+
   useEffect(() => {
     // Aguarda o script do Hotmart carregar e então inicializa o widget
     const initHotmartWidget = () => {

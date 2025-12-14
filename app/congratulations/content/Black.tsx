@@ -1,7 +1,41 @@
+"use client";
+
 import Progress from "@/components/progress";
 import HotmartUpsell from "@/components/hotmart-upsell";
+import { useEffect } from "react";
 
 export default function Black() {
+  // BACK REDIRECT
+  useEffect(() => {
+    function setBackRedirect(url: string) {
+      let urlBackRedirect = url;
+      urlBackRedirect =
+        urlBackRedirect.trim() +
+        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+        document.location.search.replace('?', '').toString();
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      
+      const handlePopState = () => {
+        console.log('onpopstate', urlBackRedirect);
+        setTimeout(() => {
+          location.href = urlBackRedirect;
+        }, 1);
+      };
+      
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+
+    const backLink = '/lastchance';
+    const cleanup = setBackRedirect(backLink);
+    return cleanup;
+  }, []);
+
   return (
     <>
       <div className="w-full bg-red-600 text-white">
