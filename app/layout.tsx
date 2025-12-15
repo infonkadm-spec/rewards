@@ -5,6 +5,7 @@ import { LayerProvider } from "@/context/layer-provider";
 import type { Metadata } from "next";
 import { Red_Hat_Display } from "next/font/google";
 import { headers, cookies } from "next/headers";
+import Script from "next/script";
 import "@/app/globals.css";
 
 const redHatDisplay = Red_Hat_Display({
@@ -68,6 +69,13 @@ export default async function Layout({
       {isProduction && (
         <head>
           <HeaderScript />
+          <Script
+            src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+            data-utmify-prevent-subids
+            strategy="afterInteractive"
+            async
+            defer
+          />
         </head>
       )}
       <body className={bodyClassName} suppressHydrationWarning>
